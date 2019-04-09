@@ -1,0 +1,48 @@
+<h1>Contact Page</h1>
+
+{{!-- 
+isValidEmail: {{isValidEmail}} <br>
+isValidMessage: {{isValidMessage}} <br>
+isDisabled: {{isDisabled}} <br>
+isBothTrue: {{isBothTrue}} <br> 
+
+<p>
+    Button should be Disable if isValidEmail is true === (<b>{{isValidEmail}}</b>) <strong>and</strong> isValidMessage is true === (<b>{{isValidMessage}}</b>)
+</p>
+--}}
+
+{{#if responseMessage}}
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4>Thank you! Your message is sent.</h4>
+        <p>{{responseMessage}}</p>
+      </div>
+    </div>
+  </div>
+{{/if}}
+
+<div class="row">
+
+  <div class="col-md-6 col-md-offset-3">
+    <p class="well">If you have any question or feedback please leave a message with your email address.</p>
+    <form>
+      <div class="form-group">
+        <label for="email-contact-form">* Your email address:</label>
+        {{input type="email" id="email-contact-form" value=emailAddress class="form-control" placeholder="Please type your e-mail address." autofocus="autofocus"}}
+      </div>
+
+      <div class="form-group">
+        <label for="message-contact-form">* Your message:</label>
+        {{textarea class="form-control" id="message-contact-form" placeholder="Your message. (At least 5 characters.)" rows="7" value=message aria-describeby="help-block-message"}}
+        <span id="help-block-message" class="help-block">Your message has to have at least 5 characters</span>
+      </div>
+
+      <button type="submit" class="btn btn-primary mb-2 btn-block" {{action "sendMessage"}}
+        disabled={{isDisabled}}>
+        Send
+      </button>
+    </form>
+  </div>
+</div>
