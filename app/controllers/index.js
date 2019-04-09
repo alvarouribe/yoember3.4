@@ -14,12 +14,15 @@ export default Controller.extend({
 
     saveInvitation() {
       const email = this.get('emailAddress');
-
+      this.set('loading', true);
       const newInvitation = this.store.createRecord('invitation', { email: email });
-      newInvitation.save();
+      newInvitation.save().then(response => {
+        console.log('Response received', response);
+        this.set('responseMessage', `Thank you! We have just saved your email address: ${this.get('emailAddress')}`);
+        this.set('emailAddress', '');
+        this.set('loading', false);
+      })
 
-      this.set('responseMessage', `Thank you! We have just saved your email address: ${this.get('emailAddress')}`);
-      this.set('emailAddress', '');
     }
   }
 
