@@ -1,15 +1,15 @@
 <h1>Contact Page</h1>
 
-{{!-- 
-isValidEmail: {{isValidEmail}} <br>
-isValidMessage: {{isValidMessage}} <br>
+{{!-- isValidEmail: {{isValidEmail}} <br>
+isValidMessage: {{isValidMessage}} <br><br>
+isDisabledGlobal: {{isDisabledGlobal}} <br>
 isDisabled: {{isDisabled}} <br>
 isBothTrue: {{isBothTrue}} <br> 
 
 <p>
     Button should be Disable if isValidEmail is true === (<b>{{isValidEmail}}</b>) <strong>and</strong> isValidMessage is true === (<b>{{isValidMessage}}</b>)
-</p>
---}}
+</p> --}}
+
 
 {{#if responseMessage}}
   <div class="row">
@@ -40,7 +40,7 @@ isBothTrue: {{isBothTrue}} <br>
       </div>
 
       <button type="submit" class="btn btn-primary mb-2 btn-block" {{action "sendMessage"}}
-        disabled={{isDisabled}}>
+        disabled={{isDisabledGlobal}}>
         Send
       </button>
     </form>

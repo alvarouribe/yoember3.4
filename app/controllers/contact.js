@@ -1,5 +1,7 @@
 import Controller from '@ember/controller';
-import { match, not, gte } from '@ember/object/computed';
+import { computed } from '@ember/object';
+// import { match, gte } from '@ember/object/computed';
+// import { match, not, gte } from '@ember/object/computed';
 // import { and } from '@ember/object/computed';
 
 export default Controller.extend({
@@ -8,12 +10,21 @@ export default Controller.extend({
   message: '',
   responseMessage: '',
 
-  isValidEmail: match('emailAddress', /^.+@.+\..+$/),
-  isValidMessage: gte('message.length', 5),
+  isValidEmail: computed('emailAddress', function() {
+    const emailAddress = this.get('emailAddress');
+    return emailAddress.match(/^.+@.+\..+$/) ? true : false;
+  }),
+  
+  isValidMessage: computed('message', function() {
+    const message = this.get('message');
+    return message.length >= 5;
+  }),
 
-  isDisabled: not('isValidEmail') && not('isValidMessage'),
+  isDisabledGlobal: computed('isValidEmail', 'isValidMessage', function() {
+    return this.get('isValidEmail') && this.get('isValidMessage') ? false : true;
+  }),
+  // isDisabledGlobal: not('isValidEmail') && not('isValidMessage'),
   // isBothTrue: and('isValidEmail', 'isValidMessage'), //To compute if 2 vars are true. note: make sure import and.
-
 
   actions: {
     sendMessage: function () {
